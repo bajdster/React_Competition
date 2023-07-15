@@ -20,7 +20,22 @@ main
     .competitionForm
     {
         width:50%;
-        height: 300px;
+        // height: 300px;
+        // display: flex;
+        // align-items: center;
+        // justify-content: center;
         // background-color: azure;
+
+        form
+        {
+            display: flex;
+            // justify-content: space-evenly;
+            align-items: center;
+
+            Button
+            {
+                margin-left:10px;
+            }
+        }
     }
 }

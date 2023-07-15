@@ -20,7 +20,7 @@ const MainBox = () => {
 
         <div className={classes.competitionForm}>
         <form>
-            <TextField id="outlined-basic" label="Outlined" variant="outlined" inputRef={nameRef}/>
+            <TextField id="outlined-basic" label="Name" variant="outlined" inputRef={nameRef}/>
             <Button onClick={addName} variant="contained">Add Name</Button>
         </form>
         </div>
