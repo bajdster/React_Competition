@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Goldman:wght@700&family=Lily+Script+One&family=Nova+Oval&display=swap');
+
+
+main
+{
+    width:100%;
+    height: 300px;
+
+    h1
+    {
+        font-family: 'Goldman', cursive;
+        font-size: 50px;
+
+        span
+        {
+            color: rgb(13, 146, 173);
+        }
+    }
+
+    .competitionForm
+    {
+        width:50%;
+        height: 300px;
+        // background-color: azure;
+    }
+}
