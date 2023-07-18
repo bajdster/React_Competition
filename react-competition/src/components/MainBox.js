@@ -1,30 +1,46 @@
 import React, {useState, useRef} from 'react'
 import classes from "../components/MainBox.module.scss"
+import People from "../assets/people.jpg"
+import Players from './Players'
 
-import { FormControl, TextField, Button } from '@mui/material'
+import { TextField, Button, Stack} from '@mui/material'
+
 
 const MainBox = () => {
 
-    const [name, setName] = useState("Antek")
+    const [names, setNames] = useState([])
     const nameRef = useRef()
 
-    const addName = ()=>
+    const addName = (e)=>
     {
-        setName(nameRef.current.value)
+        e.preventDefault();
+        setNames((prev)=>
+        {
+          return [...prev, nameRef.current.value]
+        })
+        nameRef.current.value = ""
     }
 
   return (
     <main>
-        <h1>Type winner's</h1>
-        <h1><span>NAME</span></h1>
-
+        
         <div className={classes.competitionForm}>
-        <form>
-            <TextField id="outlined-basic" label="Name" variant="outlined" inputRef={nameRef}/>
-            <Button onClick={addName} variant="contained">Add Name</Button>
-        </form>
+
+          <h1>Type winner's</h1>
+          <h1><span>NAME</span></h1>
+
+          <div className={classes.peopleImage}><img src={People}></img></div>
+
+          <form onSubmit={addName}>
+              <TextField id="outlined-basic" label="Name" variant="outlined" inputRef={nameRef}/>
+              <Button type= "submit" variant="contained" >Add Name</Button>
+          </form>
         </div>
-        <div>{name}</div>
+
+        <Players names={names}/>
+      
+      
+        
     </main>
   )
 }
