@@ -14,11 +14,15 @@ const MainBox = () => {
     const addName = (e)=>
     {
         e.preventDefault();
-        setNames((prev)=>
+        if(nameRef.current.value)
         {
-          return [...prev, nameRef.current.value]
-        })
-        nameRef.current.value = ""
+          setNames((prev)=>
+          {
+            return [...prev, nameRef.current.value]
+          })
+          nameRef.current.value = ""
+        }
+      
     }
 
   return (

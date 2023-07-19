@@ -3,7 +3,7 @@
     background-color:#3281a8;
         color: #FFFFFF;
         height: 50px;
-        width:70%;
+        min-width:100px;
         text-align: center;
         display: flex;
         align-items: center;
@@ -11,4 +11,40 @@
         border-radius: 10px;
         box-shadow: 1px 1px 6px 0px black;
         position: relative;
+        margin-bottom: 10px;
+        user-select: none;
+        padding:10px;
+
+        &:hover
+        {
+            background-color: #21526a;
+            cursor: pointer;
+        }
+
+      
+    }
+    .agenda
+    {
+        width:70%;
+        background-color:#3281a8;
+        color: #FFFFFF;
+        height: 50px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        box-shadow: 1px 1px 6px 0px black;
+        position: relative;
+        margin-bottom: 10px;
+        user-select: none;
+        padding:10px;
+
+
+        &:hover
+        {
+            background-color: #21526a;
+            cursor: pointer;
+        }
+
     }
