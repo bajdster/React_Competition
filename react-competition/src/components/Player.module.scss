@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Goldman:wght@700&family=Lily+Script+One&family=Nova+Oval&display=swap');
+
+
 .player 
 {
-    background-color:#3281a8;
-        color: #FFFFFF;
+    // background-color:#3281a8;
+        // color: #FFFFFF;
         height: 50px;
         min-width:100px;
         text-align: center;
@@ -9,16 +12,18 @@
         align-items: center;
         justify-content: center;
         border-radius: 10px;
-        box-shadow: 1px 1px 6px 0px black;
+        // box-shadow: 1px 1px 6px 0px black;
         position: relative;
         margin-bottom: 10px;
         user-select: none;
         padding:10px;
+        font-family: 'Goldman', cursive;
 
         &:hover
         {
             background-color: #21526a;
             cursor: pointer;
+            color:white;
         }
 
       
@@ -26,24 +31,26 @@
     .agenda
     {
         width:70%;
-        background-color:#3281a8;
-        color: #FFFFFF;
+        // background-color:#3281a8;
+        // color: #FFFFFF;
         height: 50px;
         text-align: center;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 10px;
-        box-shadow: 1px 1px 6px 0px black;
+        // box-shadow: 1px 1px 6px 0px black;
         position: relative;
         margin-bottom: 10px;
         user-select: none;
         padding:10px;
+        font-family: 'Goldman', cursive;
 
 
         &:hover
         {
             background-color: #21526a;
+            color:white;
             cursor: pointer;
         }
 
