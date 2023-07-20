@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
-import Item from '@mui/material/Stack';
 import GridViewIcon from '@mui/icons-material/GridView';
 import ViewAgendaIcon from '@mui/icons-material/ViewAgenda';
-
+import { useSelector } from 'react-redux';
 import classes from "./Players.module.scss"
 import Player from "./Player"
 
@@ -10,11 +9,7 @@ import Player from "./Player"
 const Players = (props) => {
 
     const [agendaView, setAgendaView] = useState(false)
-
-    const handleClick = () =>
-    {
-        console.log("Yeah")
-    }
+    const players = useSelector(state=> state.players.names)
 
     const viewChange = () =>
     {
@@ -41,10 +36,10 @@ const Players = (props) => {
               }}}/>
         </div>
       <div className={classes.players}>
-        {props.names.map((name, index)=>
+        {players.length> 0 ? props.names.map((name, index)=>
         {
-          return <Player key={index} index={index} name ={name} onClick={handleClick} agenda={agendaView}/> 
-        })}
+          return <Player key={index} index={index} name ={name} agenda={agendaView}/> 
+        }): <p>There is no added players</p>}
         </div>
     </div>
   )

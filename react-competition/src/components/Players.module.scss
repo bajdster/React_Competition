@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Goldman:wght@700&family=Lily+Script+One&family=Nova+Oval&display=swap');
+
 .playersBox
 {
     width:40%;
@@ -17,5 +19,11 @@
     .playersOptions
     {
         padding-left:20px;
+    }
+
+    p
+    {
+        font-family: 'Goldman', cursive;
+        color:rgb(163, 163, 163)
     }
 }
