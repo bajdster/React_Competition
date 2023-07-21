@@ -16,6 +16,8 @@ const Players = (props) => {
     const players = useSelector(state=> state.players.names)
     const [winner, setWinner] = useState("")
     const dispatch = useDispatch()
+    const [animationIndex, setAnimationIndex] = useState(null);
+    const [isAnimating, setIsAnimating] = useState(false);
 
     const viewChange = () =>
     {
@@ -29,9 +31,9 @@ const Players = (props) => {
     {
         const playersAmount = players.length;
         const random = Math.floor(Math.random() * playersAmount)
-        const winner  = players[random]
+        const winner  = players[random];
         setWinner(winner);
-
+        handleRandomAnimation();
         dispatch(compActions.getWinner(winner))
     }
 
@@ -42,8 +44,57 @@ const Players = (props) => {
     //     return
     //   }
       
+    //   if (!isAnimating) {
+    //     setIsAnimating(true);
+  
+    //     // Losowanie indeksu
+    //     const randomIndex = Math.floor(Math.random() * players.length);
+  
+    //     // Ustawienie aktualnego indeksu w stanie
+    //     setAnimationIndex(randomIndex);
+  
+    //     // Po kilku sekundach zakończ animację i zresetuj stan
+    //     setTimeout(() => {
+    //       setIsAnimating(false);
+    //       setAnimationIndex(null);
+    //     }, 2000); // Długość animacji w milisekundach (tu: 2000 ms)
+    //   }
 
     // }, [winner])
+
+    //doesnt work
+    const handleRandomAnimation = async () => 
+    {
+      const sleep = (ms) =>
+      {
+        return new Promise(resolve => setTimeout(resolve, ms))
+      }
+
+      players.forEach(player=>
+        {
+          if (!isAnimating) 
+          {
+            console.log("yup")
+            setIsAnimating(true);
+      
+            // Losowanie indeksu
+            const randomIndex = Math.floor(Math.random() * players.length);
+      
+            // Ustawienie aktualnego indeksu w stanie
+            setAnimationIndex(randomIndex);
+      
+            // Po kilku sekundach zakończ animację i zresetuj stan
+            setTimeout(() => {
+              setIsAnimating(false);
+              setAnimationIndex(null);
+            }, 500); // Długość animacji w milisekundach (tu: 2000 ms)
+            
+          }
+          
+        })
+        
+    };
+
 
     const resetCompetition = () =>
     {
@@ -76,7 +127,8 @@ const Players = (props) => {
       <div className={classes.players}>
         {players.length> 0 ? props.names.map((name, index)=>
         {
-          return <Player key={index} index={index} name ={name} agenda={agendaView}/> 
+          const playerClass = index === animationIndex && isAnimating ? 'animated' : '';
+          return <Player key={index} index={index} name ={name} agenda={agendaView} animated={playerClass}/> 
         }): <p>There is no added players</p>}
         </div>
 

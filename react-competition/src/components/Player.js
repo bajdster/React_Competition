@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { compActions } from '../store/comp-slice';
 import { TextField, Button, Stack} from '@mui/material'
 
-const Player = ({name, index, agenda}) => {
+const Player = ({name, index, agenda, animated}) => {
 
   const [optionsVisible, setOptionVisible] = useState(false)
   const [editMode, setEditMode] = useState(false)
@@ -60,8 +60,7 @@ const Player = ({name, index, agenda}) => {
 
   return (
     <>
-    
-    <div className={`${agenda ? classes.agenda : classes.player}`} onDoubleClick={switchOptionsVisible}>
+    <div className={`${agenda ? classes.agenda : classes.player} ${animated ? classes.animated : ''}`} onDoubleClick={switchOptionsVisible}>
     {editMode ? 
           <form className = {classes.editForm} onSubmit={setEditName}>
               <TextField id="outlined-basic" label="" variant="outlined" 
