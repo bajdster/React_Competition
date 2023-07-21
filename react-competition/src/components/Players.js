@@ -62,36 +62,58 @@ const Players = (props) => {
 
     // }, [winner])
 
+    const sleep = (ms) =>
+    {
+      return new Promise(resolve => setTimeout(resolve, ms))
+    }
     //doesnt work
     const handleRandomAnimation = async () => 
     {
-      const sleep = (ms) =>
-      {
-        return new Promise(resolve => setTimeout(resolve, ms))
-      }
-
-      players.forEach(player=>
-        {
-          if (!isAnimating) 
-          {
-            console.log("yup")
-            setIsAnimating(true);
+    
+      // if (!isAnimating) 
+      // {
+      //   players.forEach(player=>
+      //   {
+      //       console.log("yup")
+      //       setIsAnimating(true);
       
-            // Losowanie indeksu
-            const randomIndex = Math.floor(Math.random() * players.length);
+      //       // Losowanie indeksu
+      //       const randomIndex = Math.floor(Math.random() * players.length);
       
-            // Ustawienie aktualnego indeksu w stanie
-            setAnimationIndex(randomIndex);
+      //       // Ustawienie aktualnego indeksu w stanie
+      //       setAnimationIndex(randomIndex);
       
-            // Po kilku sekundach zakończ animację i zresetuj stan
-            setTimeout(() => {
-              setIsAnimating(false);
-              setAnimationIndex(null);
-            }, 500); // Długość animacji w milisekundach (tu: 2000 ms)
-            
-          }
+      //       // Po kilku sekundach zakończ animację i zresetuj stan
+      //       setTimeout(() => {
+      //         setIsAnimating(false);
+      //         setAnimationIndex(null);
+      //       }, 500); // Długość animacji w milisekundach (tu: 2000 ms)
+      //       // await sleep(1000)
+      //     }
           
-        })
+      //   )}
+
+      if(!isAnimating)
+      {
+        for(let i = 0; i<players.length; i++)
+        {
+          console.log("yup")
+                setIsAnimating(true);
+          
+                // Losowanie indeksu
+                const randomIndex = Math.floor(Math.random() * players.length);
+          
+                // Ustawienie aktualnego indeksu w stanie
+                setAnimationIndex(randomIndex);
+          
+                // Po kilku sekundach zakończ animację i zresetuj stan
+                setTimeout(() => {
+                  setIsAnimating(false);
+                  setAnimationIndex(null);
+                }, 500); // Długość animacji w milisekundach (tu: 2000 ms)
+                await sleep(1000)
+        }
+      }
         
     };
 
