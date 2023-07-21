@@ -14,7 +14,7 @@ const Players = (props) => {
 
     const [agendaView, setAgendaView] = useState(false)
     const players = useSelector(state=> state.players.names)
-    const [winner, setWinner] = useState("")
+    // const [winner, setWinner] = useState("")
     const dispatch = useDispatch()
     const [animationIndex, setAnimationIndex] = useState(null);
     const [isAnimating, setIsAnimating] = useState(false);
@@ -29,90 +29,60 @@ const Players = (props) => {
 
     const winnerSearch = () =>
     {
-        const playersAmount = players.length;
-        const random = Math.floor(Math.random() * playersAmount)
-        const winner  = players[random];
-        setWinner(winner);
-        handleRandomAnimation();
-        dispatch(compActions.getWinner(winner))
+      handleRandomAnimation();
     }
 
-    // useEffect(()=>
-    // {
-    //   if(winner === '')
-    //   {
-    //     return
-    //   }
-      
-    //   if (!isAnimating) {
-    //     setIsAnimating(true);
-  
-    //     // Losowanie indeksu
-    //     const randomIndex = Math.floor(Math.random() * players.length);
-  
-    //     // Ustawienie aktualnego indeksu w stanie
-    //     setAnimationIndex(randomIndex);
-  
-    //     // Po kilku sekundach zakończ animację i zresetuj stan
-    //     setTimeout(() => {
-    //       setIsAnimating(false);
-    //       setAnimationIndex(null);
-    //     }, 2000); // Długość animacji w milisekundach (tu: 2000 ms)
-    //   }
-
-    // }, [winner])
 
     const sleep = (ms) =>
     {
       return new Promise(resolve => setTimeout(resolve, ms))
     }
-    //doesnt work
+
     const handleRandomAnimation = async () => 
     {
-    
-      // if (!isAnimating) 
-      // {
-      //   players.forEach(player=>
-      //   {
-      //       console.log("yup")
-      //       setIsAnimating(true);
       
-      //       // Losowanie indeksu
-      //       const randomIndex = Math.floor(Math.random() * players.length);
-      
-      //       // Ustawienie aktualnego indeksu w stanie
-      //       setAnimationIndex(randomIndex);
-      
-      //       // Po kilku sekundach zakończ animację i zresetuj stan
-      //       setTimeout(() => {
-      //         setIsAnimating(false);
-      //         setAnimationIndex(null);
-      //       }, 500); // Długość animacji w milisekundach (tu: 2000 ms)
-      //       // await sleep(1000)
-      //     }
-          
-      //   )}
+      let randomIndex;
 
       if(!isAnimating)
       {
-        for(let i = 0; i<players.length; i++)
+        for(let i = 0; i<=10; i++)
         {
           console.log("yup")
                 setIsAnimating(true);
           
                 // Losowanie indeksu
-                const randomIndex = Math.floor(Math.random() * players.length);
+                randomIndex = Math.floor(Math.random() * players.length);
+
+                if(i===10)
+                {
+                  setAnimationIndex(randomIndex);
+                  const winner  = players[randomIndex];
+       
+                  setTimeout(() => 
+                  {
+                    setIsAnimating(false);
+                    setAnimationIndex(null);
+                  }, 2000);
+                  dispatch(compActions.getWinner(winner))
+                  return
+                }
+                else
+                {
+                  setAnimationIndex(randomIndex);
+          
+                  // Po kilku sekundach zakończ animację i zresetuj stan
+                  setTimeout(() => 
+                  {
+                    setIsAnimating(false);
+                    setAnimationIndex(null);
+                  }, 100);
+                  await sleep(200)
+                }
           
                 // Ustawienie aktualnego indeksu w stanie
-                setAnimationIndex(randomIndex);
-          
-                // Po kilku sekundach zakończ animację i zresetuj stan
-                setTimeout(() => {
-                  setIsAnimating(false);
-                  setAnimationIndex(null);
-                }, 500); // Długość animacji w milisekundach (tu: 2000 ms)
-                await sleep(1000)
+                
         }
+        
       }
         
     };
