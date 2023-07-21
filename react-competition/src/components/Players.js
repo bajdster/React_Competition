@@ -1,11 +1,13 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import GridViewIcon from '@mui/icons-material/GridView';
 import ViewAgendaIcon from '@mui/icons-material/ViewAgenda';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import classes from "./Players.module.scss"
 import Player from "./Player"
 import { Button } from '@mui/material';
-import Winner from "../assets/youwin.gif"
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
+
+import { compActions } from '../store/comp-slice';
 
 
 const Players = (props) => {
@@ -13,6 +15,7 @@ const Players = (props) => {
     const [agendaView, setAgendaView] = useState(false)
     const players = useSelector(state=> state.players.names)
     const [winner, setWinner] = useState("")
+    const dispatch = useDispatch()
 
     const viewChange = () =>
     {
@@ -26,8 +29,26 @@ const Players = (props) => {
     {
         const playersAmount = players.length;
         const random = Math.floor(Math.random() * playersAmount)
+        const winner  = players[random]
+        setWinner(winner);
 
-        setWinner(players[random])
+        dispatch(compActions.getWinner(winner))
+    }
+
+    // useEffect(()=>
+    // {
+    //   if(winner === '')
+    //   {
+    //     return
+    //   }
+      
+
+    // }, [winner])
+
+    const resetCompetition = () =>
+    {
+      const confirm = window.confirm("Do you want to reset competition?")
+      if(confirm) dispatch(compActions.resetState())
     }
 
   return (
@@ -45,6 +66,12 @@ const Players = (props) => {
                 color: 'black',
                 cursor: 'pointer',
               }}}/>
+              <RestartAltIcon sx={{color:"grey",
+            '&:hover':  {
+                backgroundColor: 'transparent',
+                color: 'black',
+                cursor: 'pointer',
+              }}} onClick = {resetCompetition}/>
         </div>
       <div className={classes.players}>
         {players.length> 0 ? props.names.map((name, index)=>
@@ -57,11 +84,6 @@ const Players = (props) => {
             {players.length> 0 &&<Button variant='text' sx={{ fontSize:"50px", color: 'rgb(13, 146, 173)', fontWeight:"bold", textShadow:"1px 1px 5px black"}} onClick={winnerSearch}>Let's find out!</Button>}
         </div>
         
-        <h2>{winner}</h2>
-        {winner !== '' && <div className={classes.winning}>
-        
-            <img src={Winner}></img>
-        </div>}
     </div>
   )
 }

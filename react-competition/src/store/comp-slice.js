@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const compSlice = createSlice({
     name:'players',
     initialState:{
-        names: []
+        names: [],
+        winner: ''
     },
     reducers: {
         addPlayer(state, action)
@@ -34,6 +35,18 @@ const compSlice = createSlice({
                 else return player
             })
             state.names = editedArr
+        },
+
+        getWinner(state, action)
+        {
+            const winnerName = action.payload;
+            state.winner = winnerName;
+        },
+
+        resetState(state, action)
+        {
+            state.names = []
+            state.winner = ''
         }
     }
 })
