@@ -42,12 +42,6 @@ main
         flex-direction: column;
         align-items: center;
         margin-top: 20px;
-        // justify-content: space-around;
-        // height: 300px;
-        // display: flex;
-        // align-items: center;
-        // justify-content: center;
-        // background-color: azure;
 
         form
         {
@@ -62,4 +56,43 @@ main
             }
         }
     }
+}
+
+@media only screen and (max-width: 768px)  
+{
+        main
+        {
+            flex-direction: column;
+
+            
+        
+            h1
+            {
+                font-size: 40px;
+                text-align: center;
+
+                &:nth-child(2)
+                {
+                    margin-bottom: 30px;
+                }
+            }
+
+            .peopleImage
+            {
+                height: 200px;
+                width: 300px;
+            }
+        }
+}
+
+@media only screen and (min-width:768px) and (max-width:1232px)
+{
+    main
+    {
+        h1
+        {
+            font-size:50px;
+        }
+    }
+   
 }

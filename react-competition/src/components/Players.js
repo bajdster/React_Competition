@@ -4,7 +4,7 @@ import ViewAgendaIcon from '@mui/icons-material/ViewAgenda';
 import { useSelector, useDispatch } from 'react-redux';
 import classes from "./Players.module.scss"
 import Player from "./Player"
-import { Button, Checkbox, FormControlLabel } from '@mui/material';
+import { Button} from '@mui/material';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import {Tooltip} from 'react-tooltip'
 
@@ -19,6 +19,7 @@ const Players = (props) => {
     const dispatch = useDispatch()
     const [animationIndex, setAnimationIndex] = useState(null);
     const [isAnimating, setIsAnimating] = useState(false);
+    const [isChecked, setIsChecked] = useState(false)
 
     const viewChange = () =>
     {
@@ -43,6 +44,7 @@ const Players = (props) => {
     {
       
       let randomIndex;
+      let timer;
 
       if(!isAnimating)
       {
@@ -59,7 +61,7 @@ const Players = (props) => {
                   setAnimationIndex(randomIndex);
                   const winner  = players[randomIndex];
        
-                  setTimeout(() => 
+                  timer = setTimeout(() => 
                   {
                     setIsAnimating(false);
                     setAnimationIndex(null);
@@ -72,7 +74,7 @@ const Players = (props) => {
                   setAnimationIndex(randomIndex);
           
                   // Po kilku sekundach zakończ animację i zresetuj stan
-                  setTimeout(() => 
+                  const timer = setTimeout(() => 
                   {
                     setIsAnimating(false);
                     setAnimationIndex(null);
@@ -86,8 +88,8 @@ const Players = (props) => {
         
       }
         
+      clearTimeout(timer)
     };
-
 
     const resetCompetition = () =>
     {
@@ -99,10 +101,18 @@ const Players = (props) => {
       }
     }
 
+    const checkboxHandle = () =>
+    {
+      setIsChecked((prev)=>
+      {
+        return !prev;
+      })
+    }
+
   return (
   <div className={classes.playersBox}>
         <div className={classes.playersOptions}>
-        <div className={classes.leftOptions}>
+
             <Tooltip id="grid"/> 
             <GridViewIcon data-tooltip-id="grid" data-tooltip-content="Grid View" onClick={viewChange} sx={{color: agendaView ? "grey":"black",
             '&:hover':  {
@@ -124,8 +134,7 @@ const Players = (props) => {
                 color: 'black',
                 cursor: 'pointer',
               }}} onClick = {resetCompetition}/>
-          </div>
-              <FormControlLabel control={<Checkbox />} label="More winners"/>
+          
         </div>
       <div className={classes.players}>
         {players.length> 0 ? props.names.map((name, index)=>
@@ -136,7 +145,7 @@ const Players = (props) => {
         </div>
 
         <div className={classes.actionButton}>
-            {players.length> 0 &&<Button variant='text' sx={{ fontSize:"50px", color: 'rgb(13, 146, 173)', fontWeight:"bold", textShadow:"1px 1px 5px black"}} onClick={winnerSearch}>Let's find out!</Button>}
+            {players.length> 0 &&<Button variant='text' sx={{ fontSize:"40px", color: 'rgb(13, 146, 173)', fontWeight:"bold", textShadow:"1px 1px 5px black"}} onClick={winnerSearch}>Let's find out!</Button>}
         </div>
         
     </div>
