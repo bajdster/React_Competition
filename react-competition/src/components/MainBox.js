@@ -40,7 +40,7 @@ const MainBox = () => {
             {winner === "" ? <img src={People} alt="people"></img>:
           
         
-            <img src={Winner} ></img>}
+            <img src={Winner} alt="winner gif"></img>}
           </div>
 
           <form onSubmit={addName}>

@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+//"Andrzej", "Jurek", "Antek", "Cristiano", "Leo", "Robert", "Paul"
+
 const compSlice = createSlice({
     name:'players',
     initialState:{
