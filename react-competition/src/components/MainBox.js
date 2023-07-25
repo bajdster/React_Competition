@@ -13,6 +13,7 @@ const MainBox = () => {
 
   const players = useSelector(state=>state.players.names)
   const winner = useSelector(state=>state.players.winner)
+  const lang = useSelector(state=>state.players.lang)
   const dispatch = useDispatch()
 
     const nameRef = useRef()
@@ -33,8 +34,8 @@ const MainBox = () => {
         
         <div className={classes.competitionForm}>
 
-          <h1>Type winner's</h1>
-          {winner === '' ? <h1><span>NAME</span></h1>: <h1><span>{winner}</span></h1>}
+          {winner === '' ? <h1>{lang === 'english' ? "Type winner's": 'Wpisz swojego'}</h1> : <h1>{lang === 'english' ? "The winner is": 'Wygrywa'}</h1>}
+          {winner === '' ? <h1><span>{lang === 'english'? 'NAME' : 'UCZESTNIKA'}</span></h1>: <h1><span>{winner}</span></h1>}
 
           <div className={classes.peopleImage}>
             {winner === "" ? <img src={People} alt="people"></img>:
@@ -44,8 +45,8 @@ const MainBox = () => {
           </div>
 
           <form onSubmit={addName}>
-              <TextField id="outlined-basic" label="Name" variant="outlined" inputRef={nameRef}/>
-              <Button type= "submit" variant="contained" >Add Name</Button>
+              <TextField id="outlined-basic" label={lang === 'english' ? 'Name': 'Imię'} variant="outlined" inputRef={nameRef}/>
+              <Button type= "submit" variant="contained" >{lang === 'english'? 'Add name' : 'Dodaj imię'}</Button>
           </form>
         </div>
 
@@ -58,3 +59,5 @@ const MainBox = () => {
 }
 
 export default MainBox
+
+//add polish version

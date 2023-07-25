@@ -15,6 +15,7 @@ const Players = (props) => {
 
     const [agendaView, setAgendaView] = useState(false)
     const players = useSelector(state=> state.players.names)
+    const lang = useSelector(state=>state.players.lang)
     // const [winner, setWinner] = useState("")
     const dispatch = useDispatch()
     const [animationIndex, setAnimationIndex] = useState(null);
@@ -95,7 +96,7 @@ const Players = (props) => {
     {
       if(players.length > 0)
       {
-        const confirm = window.confirm("Do you want to reset competition?")
+        const confirm = window.confirm(lang === 'english' ? "Do you want to reset competition?": 'Czy na pewno chcesz zresetować stan?')
         if(confirm) dispatch(compActions.resetState())
         
       }
@@ -114,21 +115,21 @@ const Players = (props) => {
         <div className={classes.playersOptions}>
 
             <Tooltip id="grid"/> 
-            <GridViewIcon data-tooltip-id="grid" data-tooltip-content="Grid View" onClick={viewChange} sx={{color: agendaView ? "grey":"black",
+            <GridViewIcon data-tooltip-id="grid" data-tooltip-content={lang === 'english'? 'Grid View' : 'Widok siatki'} onClick={viewChange} sx={{color: agendaView ? "grey":"black",
             '&:hover':  {
                 backgroundColor: 'transparent',
                 color: 'black',
                 cursor: 'pointer',
               }}}/>
              <Tooltip id="agenda"/>  
-            <ViewAgendaIcon data-tooltip-id="agenda" data-tooltip-content="Agenda View" onClick={viewChange} sx={{color: agendaView ? "black":"grey",
+            <ViewAgendaIcon data-tooltip-id="agenda" data-tooltip-content={lang === 'english'? 'Agenda View' : 'Widok listy'} onClick={viewChange} sx={{color: agendaView ? "black":"grey",
             '&:hover':  {
                 backgroundColor: 'transparent',
                 color: 'black',
                 cursor: 'pointer',
               }}}/>
               <Tooltip id="reset"/> 
-              <RestartAltIcon data-tooltip-id="reset" data-tooltip-content="Reset players" sx={{color:"grey",
+              <RestartAltIcon data-tooltip-id="reset" data-tooltip-content={lang === 'english'? 'Reset players' : 'Resetuj stan'} sx={{color:"grey",
             '&:hover':  {
                 backgroundColor: 'transparent',
                 color: 'black',
@@ -141,11 +142,11 @@ const Players = (props) => {
         {
           const playerClass = index === animationIndex && isAnimating ? 'animated' : '';
           return <Player key={index} index={index} name ={name} agenda={agendaView} animated={playerClass}/> 
-        }): <p>There is no added players</p>}
+        }): <p>{lang === 'english'? 'There is no added players' : 'Brak dodanych uczestników'}</p>}
         </div>
 
         <div className={classes.actionButton}>
-            {players.length> 0 &&<Button variant='text' sx={{ fontSize:"40px", color: 'rgb(13, 146, 173)', fontWeight:"bold", textShadow:"1px 1px 5px black"}} onClick={winnerSearch}>Let's find out!</Button>}
+            {players.length> 0 &&<Button variant='text' sx={{ fontSize:"40px", color: 'rgb(13, 146, 173)', fontWeight:"bold", textShadow:"1px 1px 5px black"}} onClick={winnerSearch}>{lang === 'english'? "Let's find out" : 'Losuj zwycięzcę'}</Button>}
         </div>
         
     </div>

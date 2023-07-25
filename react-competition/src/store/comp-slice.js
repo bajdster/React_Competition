@@ -6,7 +6,8 @@ const compSlice = createSlice({
     name:'players',
     initialState:{
         names: [],
-        winner: ''
+        winner: '',
+        lang: 'english'
     },
     reducers: {
         addPlayer(state, action)
@@ -49,6 +50,12 @@ const compSlice = createSlice({
         {
             state.names = []
             state.winner = ''
+        },
+
+        selectLanguage(state,action)
+        {
+            const language = action.payload;
+            language === 'polish' ? state.lang = 'polish' : state.lang ='english'
         }
     }
 })
