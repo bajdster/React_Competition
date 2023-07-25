@@ -51,7 +51,6 @@ const Players = (props) => {
       {
         for(let i = 0; i<=10; i++)
         {
-          console.log("yup")
                 setIsAnimating(true);
           
                 // Losowanie indeksu
